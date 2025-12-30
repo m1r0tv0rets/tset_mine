@@ -1,0 +1,157 @@
+ <!-- Сплеши на 134 строке -->
+ <!-- Панорамное видео на 109 cтроке -->
+ <!-- Лого на 117 cтроке -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenCraft - Главное меню</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; font-family: 'Courier New', monospace;
+            image-rendering: pixelated;
+            background-color: #000;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            filter: blur(4px) brightness(0.7);
+            object-fit: cover;
+        }
+
+        .overlay {
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+
+        .logo-container {
+            position: relative;
+            margin-bottom: 80px; 
+            margin-top: -50px;   
+        }
+
+        .logo-img {
+            width: 600px; 
+            height: auto;
+            display: block;
+            filter: drop-shadow(5px 5px 0px #333);
+        }
+
+        #splash {
+            position: absolute;
+            right: -70px;
+            bottom: 0px; 
+            color: #ffff00;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 3px 3px #3f3f00;
+            transform: rotate(-20deg);
+            animation: pulse 0.5s infinite alternate;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            from { transform: rotate(-20deg) scale(1); }
+            to { transform: rotate(-20deg) scale(1.1); }
+        }
+
+        .menu-buttons {
+            width: 500px; 
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            width: 100%;
+            height: 50px; 
+            background: #666;
+            border: 3px solid #000;
+            box-shadow: inset 3px 3px #aaa, inset -3px -3px #333;
+            color: #e0e0e0;
+            text-shadow: 2px 2px #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 22px; 
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background: #7c7c7c;
+            border-color: #fff;
+            color: #ffffa0;
+        }
+
+        .info-right {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            color: #fff;
+            font-size: 16px;
+            text-shadow: 1px 1px #000;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Видео панорама. Замени panorama.mp4 на свое название файла -->
+    <video autoplay muted loop id="bg-video">
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay">
+
+        <div class="logo-container">
+            <!-- Замени main_name.png на путь к твоей картинке -->
+            <img src="logo.png" alt="Minecraft" class="logo-img" onerror="this.src='main_name.png'">
+            <div id="splash">Splash!</div>
+        </div>
+
+        <div class="menu-buttons">
+            <div class="btn" id="play-btn">Одиночная игра</div>
+            <a href="https://github.com/" target="_blank" class="btn">Репозиторий GitHub</a>
+            <div class="btn" id="exit-btn">Выйти</div>
+        </div>
+
+        <div class="info-right">
+            Игра разработана Mojang Studio
+        </div>
+    </div>
+
+<script>
+    //Не делайте больших сплешей
+    const splashes = [
+        "Нотч победил гриферов в Квейке",
+        "Создано Нотчем",
+        "Майнкрафт в браузере!",
+        "Полностью бесплатно!",
+        "Майнкрафт создан в 2009!",
+    ];
+
+    document.getElementById('splash').innerText = splashes[Math.floor(Math.random() * splashes.length)];
+
+    document.getElementById('play-btn').onclick = function() {
+        window.location.href = 'main_game.html';
+    };
+
+    document.getElementById('exit-btn').onclick = function() {
+        if(confirm("Вы действительно хотите выйти?")) {
+            window.close();
+            alert("Закройте вкладку браузера");
+        }
+    };
+</script>
+</body>
+</html>
